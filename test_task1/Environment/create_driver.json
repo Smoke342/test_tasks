@@ -1,0 +1,54 @@
+{
+	"id": "7f2b8e9a-87bb-4e70-b56e-e9e9e5a08c5a",
+	"name": "Создание водителя",
+	"values": [
+		{
+			"key": "first_name",
+			"value": "Олег",
+			"enabled": true
+		},
+		{
+			"key": "last_name",
+			"value": "Сидоров",
+			"enabled": true
+		},
+		{
+			"key": "patronymic",
+			"value": "Олегович",
+			"enabled": true
+		},
+		{
+			"key": "birth_date",
+			"value": "1995-01-01",
+			"enabled": true
+		},
+		{
+			"key": "driving_experience_started",
+			"value": "2015-10-10",
+			"enabled": true
+		},
+		{
+			"key": "credential_type",
+			"value": "DRIVER_LICENSE",
+			"enabled": true
+		},
+		{
+			"key": "number",
+			"value": "012345",
+			"enabled": true
+		},
+		{
+			"key": "series",
+			"value": "1234",
+			"enabled": true
+		},
+		{
+			"key": "issue_date",
+			"value": "2015-10-10",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2023-04-15T11:33:11.233Z",
+	"_postman_exported_using": "Postman/10.10.1"
+}

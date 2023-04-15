@@ -1,0 +1,480 @@
+{
+	"info": {
+		"_postman_id": "48e7ec98-a062-40f6-ae53-5b84f422456b",
+		"name": "Мамаев Кирилл Владимирович ТЗ AgentApp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18055582"
+	},
+	"item": [
+		{
+			"name": "Аутентификация",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "username",
+							"value": "qa@qa.qa",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "111",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{http_schema}}://{{host}}/{{api_version}}/users/obtain-token",
+					"protocol": "{{http_schema}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"{{api_version}}",
+						"users",
+						"obtain-token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Создание водителя",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"first_name\": \"{{first_name}}\",\r\n  \"last_name\": \"{{last_name}}\",\r\n  \"patronymic\": \"{{patronymic}}\",\r\n  \"birth_date\": \"{{birth_date}}\",\r\n  \"driving_experience_started\": \"{{driving_experience_started}}\",\r\n  \"driver_licenses\": [\r\n    {\r\n      \"credential_type\": \"{{credential_type}}\",\r\n      \"number\": \"{{number}}\",\r\n      \"series\": \"{{series}}\",\r\n      \"issue_date\": \"{{issue_date}}\"\r\n    }\r\n  ]\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{http_schema}}://{{host}}/{{api_version}}/insured_objects/drivers",
+					"protocol": "{{http_schema}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"{{api_version}}",
+						"insured_objects",
+						"drivers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Создание собственника",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"last_name\": \"{{last_name}}\",\r\n  \"first_name\": \"{{first_name}}\",\r\n  \"patronymic\": \"{{patronymic}}\",\r\n  \"gender\": \"{{gender}}\",\r\n  \"birth_date\": \"{{birth_date}}\",\r\n  \"contact\":[\r\n    {\r\n      \"contact_type\":\"PHONE\",\r\n      \"data\":\"{{PHONE}}\"\r\n    },\r\n    {\r\n      \"contact_type\":\"EMAIL\",\r\n      \"data\":\"{{EMAIL}}\"\r\n    }\r\n  ],\r\n  \"credential\": [\r\n    {\r\n      \"credential_type\": \"{{credential_type}}\",\r\n      \"issue_date\": \"{{issue_date}}\",\r\n      \"issue_point\": \"{{issue_point}}\",\r\n      \"issue_point_code\": \"{{issue_point_code}}\",\r\n      \"number\": \"{{number}}\",\r\n      \"series\": \"{{series}}\"\r\n    }\r\n  ],\r\n  \"address\": [\r\n    {\r\n      \"address_query\": \"{{actual_address_query}}\",\r\n      \"address_type\": \"{{actual_address_type}}\",\r\n      \"region_kladr_id\": \"{{actual_region_kladr_id}}\",\r\n      \"city_kladr_id\": \"{{actual_city_kladr_id}}\"\r\n    },\r\n    {\r\n      \"address_query\": \"{{legal_address_query}}\",\r\n      \"address_type\": \"{{legal_address_type}}\",\r\n      \"region_kladr_id\": \"{{legal_region_kladr_id}}\",\r\n      \"city_kladr_id\": \"{{legal_city_kladr_id}}\"\r\n    }\r\n  ]\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{http_schema}}://{{host}}/v1/insured_objects/owners/natural_persons",
+					"protocol": "{{http_schema}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"v1",
+						"insured_objects",
+						"owners",
+						"natural_persons"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Создание страхователя",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"last_name\": \"{{last_name}}\",\r\n  \"first_name\": \"{{first_name}}\",\r\n  \"patronymic\": \"{{patronymic}}\",\r\n  \"gender\": \"{{gender}}\",\r\n  \"birth_date\": \"{{birth_date}}\",\r\n  \"contact\":[\r\n    {\r\n      \"contact_type\":\"PHONE\",\r\n      \"data\":\"{{PHONE}}\"\r\n    },\r\n    {\r\n      \"contact_type\":\"EMAIL\",\r\n      \"data\":\"{{EMAIL}}\"\r\n    }\r\n  ],\r\n  \"credential\": [\r\n    {\r\n      \"credential_type\": \"{{credential_type}}\",\r\n      \"issue_date\": \"{{issue_date}}\",\r\n      \"issue_point\": \"{{issue_point}}\",\r\n      \"issue_point_code\": \"{{issue_point_code}}\",\r\n      \"number\": \"{{number}}\",\r\n      \"series\": \"{{series}}\"\r\n    }\r\n  ],\r\n  \"address\": [\r\n    {\r\n      \"address_query\": \"{{actual_address_query}}\",\r\n      \"address_type\": \"{{actual_address_type}}\",\r\n      \"region_kladr_id\": \"{{actual_region_kladr_id}}\",\r\n      \"city_kladr_id\": \"{{actual_city_kladr_id}}\"\r\n    },\r\n    {\r\n      \"address_query\": \"{{legal_address_query}}\",\r\n      \"address_type\": \"{{legal_address_type}}\",\r\n      \"region_kladr_id\": \"{{legal_region_kladr_id}}\",\r\n      \"city_kladr_id\": \"{{legal_city_kladr_id}}\"\r\n    }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{http_schema}}://{{host}}/{{api_version}}/insured_objects/insurants/natural_persons",
+					"protocol": "{{http_schema}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"{{api_version}}",
+						"insured_objects",
+						"insurants",
+						"natural_persons"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Создание автомобиля",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"car_model_id\": {{car_model_id}},\r\n  \"engine_power\": {{engine_power}},\r\n  \"vin_number\": \"{{vin_number}}\",\r\n  \"number_plate\": \"{{number_plate}}\",\r\n  \"manufacturing_year\": {{manufacturing_year}},\r\n  \"max_mass\": {{max_mass}},\r\n  \"credential\": [\r\n    {\r\n      \"credential_type\": \"{{credential_type}}\",\r\n      \"issue_date\": \"{{issue_date}}\",\r\n      \"number\": \"{{number}}\",\r\n      \"series\": \"{{series}}\"\r\n    }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{http_schema}}://{{host}}/v3/insured_objects/cars",
+					"protocol": "{{http_schema}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"v3",
+						"insured_objects",
+						"cars"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Объект страхования",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"drivers\":[\r\n        \"6db52848-3977-41c8-8a9e-dbaae319a05c\"\r\n        ],\r\n    \"owner\":\"9fdd5a90-f59a-4772-8c82-b8b4874fe833\",\r\n    \"insurant\":\"9fdd5a90-f59a-4772-8c82-b8b4874fe833\",\r\n    \"car\":\"6a337708-c9b2-4bc4-99a4-0a66c3db0fe5\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{http_schema}}://{{host}}/{{api_version}}/insured_objects/",
+					"protocol": "{{http_schema}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"{{api_version}}",
+						"insured_objects",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Создание договора",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"valid_from\":\"{{valid_from}}\",\r\n    \"valid_to\":\"{{valid_to}}\",\r\n    \"engine_power\":{{engine_power}},\r\n    \"car_type\":\"{{car_type}}\",\r\n    \"target_of_using\":{{target_of_using}},\r\n    \"insurance_period\":{{insurance_period}},\r\n    \"owner_registration\":\r\n        {\"address_query\":\"{{address_query}}\",\r\n        \"city_kladr_id\":\"{{city_kladr_id}}\",\r\n        \"region_kladr_id\":\"{{region_kladr_id}}\",\r\n        \"address_type\":\"{{address_type}}\"\r\n        },\r\n    \"has_car_trailer\":{{has_car_trailer}},\r\n    \"drivers_ids\":[\r\n        \"6db52848-3977-41c8-8a9e-dbaae319a05c\"\r\n        ],\r\n    \"is_car_without_registration\":{{is_car_without_registration}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{http_schema}}://{{host}}/v3/agreements/calculations",
+					"protocol": "{{http_schema}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"v3",
+						"agreements",
+						"calculations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Обновление договора",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"insured_object\":\"27d83202-64f6-4ff4-b556-323aa371fe5b\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{http_schema}}://{{host}}/{{api_version}}/agreements/{{agreement_id}}",
+					"protocol": "{{http_schema}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"{{api_version}}",
+						"agreements",
+						"{{agreement_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Полный расчёт",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{http_schema}}://{{host}}/{{api_version}}/agreements/{{agreement_id}}/results/{{ins_company_code}}",
+					"protocol": "{{http_schema}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"{{api_version}}",
+						"agreements",
+						"{{agreement_id}}",
+						"results",
+						"{{ins_company_code}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "in",
+				"value": "header",
+				"type": "string"
+			},
+			{
+				"key": "key",
+				"value": "Authorization",
+				"type": "string"
+			},
+			{
+				"key": "value",
+				"value": "Token {{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "http_schema",
+			"value": "https"
+		},
+		{
+			"key": "host",
+			"value": "partner.agentapp.ru"
+		},
+		{
+			"key": "api_version",
+			"value": "v1"
+		},
+		{
+			"key": "token",
+			"value": "a3f1f7e29076fc6ecc4f3b49c7ee8e71c605a37c"
+		},
+		{
+			"key": "agreement_id",
+			"value": "5b5101b4-5ccf-43ac-861f-83dab0c07ce3"
+		},
+		{
+			"key": "ins_company_code",
+			"value": "ZETTA"
+		}
+	]
+}
